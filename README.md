@@ -57,7 +57,9 @@ Further the JSD can be calculated on indices such as DBE defined as:
 
 The function JSD is ideally taking an ICBM-OCEAN output (after molecular
 formula attribution) as input:
+
 <https://uol.de/en/icbm/marine-geochemistry/research/icbm-ocean>
+
 
 **The function takes the following arguments:**
 
@@ -116,7 +118,7 @@ A call to the function then is for example:
 
 Use the JSD to check:
 
-![image info](./Rplot01.png)
+![image info](./examplebar.png)
 
 \*further references: <https://www.pnas.org/content/106/8/2677>
 <https://ieeexplore.ieee.org/document/1365067>

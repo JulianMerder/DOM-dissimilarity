@@ -24,7 +24,7 @@ The function JSD\_DOM in this repository can be used to calculate
 dissimilarities between dissolved organic matter (DOM) samples. Commonly used dissimilarity metrics
 such as the Bray-Curtis dissimilarity look at the compositional
 dissimilarity between samples based on (relative) peak intensities or abundance of molecular formulae. In marine Geochemistry though
-- and given the plethora of detected molecular formulae in a sample- it can sometimes be
+-and given the plethora of detected molecular formulae in a sample- it can sometimes be
 more useful to instead compare molecular formula derived chemical
 characteristics between samples. Imagine two samples that both have exactly the same predefined chemical compound class distributions but without a single shared molecular formula, because they are either from completely different locations or the DOM is produced by different species.  Chemically those samples are still similar to each other. Maybe even more so than to a sample that shares some molecular formulae with them but with different chemical compound class distributions. 
 

@@ -38,12 +38,14 @@ JSD_chemtest<-function(D,method="reference",index="A",ref=1,permute=F,repe=1000,
   D$CHNOS<-ifelse((D$C+D$C13)>0&D$H>0&(D$O+D$O18)>0&(D$S+D$S34)>0&(D$N+D$N15)>0&D$rest==0,1,0)
   D$newcategory<-1+(D$C+D$C13)-0.5*(D$O+D$O18)-(D$S+D$S34)-0.5*(D$H+D$N+D$P+D$N15)
   D$newcategory<-round(D$newcategory/0.5)*0.5
+  zi<-0
+  D$NSOC<- -((-zi+4*(D$C+D$C13)+D$H-3*(D$N+D$N15)-2*(D$O+D$O18)+5*D$P-2*(D$S+D$S34))/(D$C+D$C13))+4
   
   if(index=="A") categories<-c("Aromatic","Highly.unsaturated","Unsaturated","Saturated") #need to be unique for each formula
   if(index=="A1") categories<-c("Aromatic.O_rich","Aromatic.O_poor","Highly.unsaturated.O_rich","Highly.unsaturated.O_poor","Unsaturated.O_rich","Unsaturated.O_poor","Saturated.O_rich","Saturated.O_poor") #need to be unique for each formula
   if(index=="B") categories<-c("CH","CHO","CHNO","CHOS","CHNOS")
   if(index=="C") categories<-c("newcategory")
-  
+  if(index=="D") categories<-c("NSOC")  
   #if(isos)  D$newcategory<-1+(D$C+D$C13)-0.5*(D$O+D$O18)-(D$S+D$S34)-0.5*(D$H+D$N+D$P+D$N15)
   #if(!isos) D$newcategory<-1+(D$C)-0.5*(D$O)-(D$S)-0.5*(D$H+D$N+D$P)
   
@@ -85,6 +87,25 @@ JSD_chemtest<-function(D,method="reference",index="A",ref=1,permute=F,repe=1000,
   K4<-suppressMessages(JSD(as.matrix(K3), est.prob = "empirical",unit="log2"))
   K4m<-matrix(NA,nrow(K3),ncol=repe)
   }
+  
+  if(index %in% c("D")){
+  K2<-K1 %>% group_by(sample,NSOC) %>% summarize(value=n())
+  K6 <- K2 %>%
+    pivot_wider(names_from = NSOC, values_from = value)
+  p1<-sort(as.numeric(colnames(K6)[-1]))
+  
+  K3<- as.data.frame(K6[,as.character(c("sample",p1))])
+  rownames(K3)<-K6$sample
+  K3[is.na(K3)]<-0
+  K3 <- K3 %>% arrange(factor(sample,levels=samples))
+  rownames(K3)<-K3$sample
+  K3<-K3[,-1]
+  #K8<-suppressMessages(KL(as.matrix(K7), est.prob = "empirical",unit="log2"))
+  K4<-suppressMessages(JSD(as.matrix(K3), est.prob = "empirical",unit="log2"))
+  K4m<-matrix(NA,nrow(K3),ncol=repe)
+  }  
+  
+  
   
   if(method=="matrix"){
     ok4 <- upper.tri(K4,diag = F)
@@ -247,15 +268,15 @@ JSD_chemtest<-function(D,method="reference",index="A",ref=1,permute=F,repe=1000,
 
 
 
-KU<-read.csv("Crosstab.csv")
+#KU<-read.csv("Crosstab.csv")
 
-library(dplyr)
-library(philentropy)
-library(tidyr)
-library(ggplot2)
-A<-JSD_chemtest(D=KU,method="matrix",index="C",permute=T,rename=TRUE)
-A$plot1
-A$plot2
-A1<-JSD_chemtest1(D=KU,method="matrix",permute=F,rename=TRUE)
-A1$plot1
-A1$plot2
+#library(dplyr)
+#library(philentropy)
+#library(tidyr)
+#library(ggplot2)
+#A<-JSD_chemtest(D=KU,method="matrix",index="C",permute=T,rename=TRUE)
+#A$plot1
+#A$plot2
+#A1<-JSD_chemtest1(D=KU,method="matrix",permute=F,rename=TRUE)
+#A1$plot1
+#A1$plot2

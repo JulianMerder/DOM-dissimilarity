@@ -1,4 +1,9 @@
 JSD_chemtest<-function(D,method="reference",index="A",ref=1,permute=F,repe=1000,rename=F,samplevector=NULL,sqrtJSD=F){
+  if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+  if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+  if (!require('philentropy')) install.packages('philentropy'); library('philentropy')
+  if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
+  if (!require('reshape2')) install.packages('reshape2'); library('reshape2')
   
   if(is.null(samplevector)){
     samples<-grep("ample",names(D),value=T)
@@ -39,13 +44,13 @@ JSD_chemtest<-function(D,method="reference",index="A",ref=1,permute=F,repe=1000,
   D$newcategory<-1+(D$C+D$C13)-0.5*(D$O+D$O18)-(D$S+D$S34)-0.5*(D$H+D$N+D$P+D$N15)
   D$newcategory<-round(D$newcategory/0.5)*0.5
   zi<-0
-  D$NSOC<- -((-zi+4*(D$C+D$C13)+D$H-3*(D$N+D$N15)-2*(D$O+D$O18)+5*D$P-2*(D$S+D$S34))/(D$C+D$C13))+4
+  D$NOSC<- -((-zi+4*(D$C+D$C13)+D$H-3*(D$N+D$N15)-2*(D$O+D$O18)+5*D$P-2*(D$S+D$S34))/(D$C+D$C13))+4
   
   if(index=="A") categories<-c("Aromatic","Highly.unsaturated","Unsaturated","Saturated") #need to be unique for each formula
   if(index=="A1") categories<-c("Aromatic.O_rich","Aromatic.O_poor","Highly.unsaturated.O_rich","Highly.unsaturated.O_poor","Unsaturated.O_rich","Unsaturated.O_poor","Saturated.O_rich","Saturated.O_poor") #need to be unique for each formula
   if(index=="B") categories<-c("CH","CHO","CHNO","CHOS","CHNOS")
   if(index=="C") categories<-c("newcategory")
-  if(index=="D") categories<-c("NSOC")  
+  if(index=="D") categories<-c("NOSC")  
   #if(isos)  D$newcategory<-1+(D$C+D$C13)-0.5*(D$O+D$O18)-(D$S+D$S34)-0.5*(D$H+D$N+D$P+D$N15)
   #if(!isos) D$newcategory<-1+(D$C)-0.5*(D$O)-(D$S)-0.5*(D$H+D$N+D$P)
   
@@ -89,9 +94,9 @@ JSD_chemtest<-function(D,method="reference",index="A",ref=1,permute=F,repe=1000,
   }
   
   if(index %in% c("D")){
-  K2<-K1 %>% group_by(sample,NSOC) %>% summarize(value=n())
+  K2<-K1 %>% group_by(sample,NOSC) %>% summarize(value=n())
   K6 <- K2 %>%
-    pivot_wider(names_from = NSOC, values_from = value)
+    pivot_wider(names_from = NOSC, values_from = value)
   p1<-sort(as.numeric(colnames(K6)[-1]))
   
   K3<- as.data.frame(K6[,as.character(c("sample",p1))])

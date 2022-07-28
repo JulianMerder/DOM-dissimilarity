@@ -46,13 +46,13 @@ are:
 
 **B:** “CH”, “CHO”, “CHON”, “CHOS”, “CHOP”, “CHONS”, “CHONP”, “CHONSP”
 
-Further the JSD can be calculated on indices such as the double bond equivalent (DBE) defined as:
+Further the JSD can be calculated on indices such as DBE<sub>AI</sub> defined as:
 
-**C:** 1+C-0.5O-S-0.5*(H+N+P) calculated accoring to:
+**C:** 1+C-0.5O-S-0.5*(H+N+P) calculated according to:
 
 [Koch, B. P., and Dittmar, T. (2016) From mass to structure: an aromaticity index for high-resolution mass data of natural organic matter. Rapid Commun. Mass Spectrom., 30: 250. doi: 10.1002/rcm.7433]
 
-**D:** The NSOC (Nominal oxidation state of carbon)
+**D:** The NOSC (Nominal oxidation state of carbon)
 
 The function JSD is ideally taking an ICBM-OCEAN output (after molecular
 formula attribution) as an input:

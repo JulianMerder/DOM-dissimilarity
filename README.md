@@ -89,7 +89,8 @@ Set rename=F to keep sample column names, set rename=T to rename to
 **samplevector:**
 
 Set samplevector=NULL if you are using ICBM-OCEAN data , otherwise this
-should be a vector with the column names (or numbers) of the samples in the data
+should be a vector with the column names (or numbers) of the samples in the data.
+If not using ICBM-OCEAN data and samplevector=NULL, your samples need the prefix "Sample", so the columns can be identified.
 
 **sqrtJSD:**
 
@@ -115,9 +116,9 @@ A call to the function then is for example:
 
 `A$JSresults`
 
-Use the JSD to check:
+Use the JSD to check how similar your samples are:
 
-![image info](./examplebar.png)
+![image info](./JSd_README_example.jpeg)
 
 \*further references: <https://www.pnas.org/content/106/8/2677>
 <https://ieeexplore.ieee.org/document/1365067>

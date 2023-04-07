@@ -17,6 +17,13 @@ Using the Jensen–Shannon divergence to find dissimilarities between dissolved 
     Carl-von-Ossietzky-Str. 9-11, Oldenburg 26129, Germany & Helmholtz
     Institute for Functional Marine Biodiversity (HIFMB) at the
     University of Oldenburg, Oldenburg 26129, Germany
+    
+    
+**If you use the JSD dissimilarity, please cite:** 
+
+*Kida, M., Merder, J., Fujitake, N., Tanabe, Y., Hayashi, K., Kudoh, S., & Dittmar, T. (2023). **Determinants of Microbial-Derived Dissolved Organic Matter Diversity in Antarctic Lakes**. Environmental Science & Technology.
+DOI: 10.1021/acs.est.3c00249*
+
 
 **JSD\_DOM:**
 

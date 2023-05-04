@@ -127,5 +127,4 @@ Use the JSD to check how similar your samples are:
 
 ![image info](./JSd_README_example.jpeg)
 
-\*further references: <https://www.pnas.org/content/106/8/2677>
-<https://ieeexplore.ieee.org/document/1365067>
+
